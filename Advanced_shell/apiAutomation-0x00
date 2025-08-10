@@ -1,0 +1,2 @@
+#!/bin/bash
+curl -s -o data.json -w "%{http_code}" https://pokeapi.co/api/v2/pokemon/pikachu | grep -q "^2" || echo "Failed to fetch data for Pikachu" >> errors.txt
