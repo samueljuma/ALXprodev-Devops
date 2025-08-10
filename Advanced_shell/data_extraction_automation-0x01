@@ -1,0 +1,7 @@
+#!/bin/bash
+jq -r '.name, .types[0].type.name, (.weight/10|tostring), (.height/10|tostring)' data.json |
+awk 'NR==1{n=toupper(substr($0,1,1)) substr($0,2)}
+     NR==2{t=toupper(substr($0,1,1)) substr($0,2)}
+     NR==3{w=$0}
+     NR==4{h=$0}
+     END{print n " is of type " t ", weighs " w "kg, and is " h "m tall."}'
