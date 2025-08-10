@@ -17,10 +17,19 @@ fetch_pokemon() {
     fi
 }
 
-# Run all fetches in parallel
+# Start fetches in parallel
 for pokemon in "${POKEMONS[@]}"; do
     fetch_pokemon "$pokemon" &
 done
 
-wait  # Wait for all background processes to complete
+# Show active jobs
+echo "Active jobs:"
+jobs
+
+# Wait for all to finish
+wait
+
+# Kill any lingering jobs (just in case)
+kill $(jobs -p) 2>/dev/null
+
 echo "All Pokémon data fetched."
